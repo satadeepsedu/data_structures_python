@@ -1,9 +1,50 @@
 class Node:
+    """
+    A Node class represents a single node of a linked list.
+    
+    Attributes
+    ----------
+    data : any type
+        Information stored by the node.
+    next: class
+        Address of the next node of the Linked List.
+    """
     def __init__(self,data,next=None):
         self.data = data
         self.next = next
 
 class LinkedList:
+    """
+    A LinkedList represents a chain of Nodes.
+
+    Attributes
+    ----------
+
+    Method
+    ------
+    __init__():
+        initializes the head of the list.
+    showList():
+        display the linked list.
+    insertNodeBeginning(data):
+        inserts a node at the beginning of the list. The argument "data" is the value of the node being inserted.
+    insertNodeWithin(prev_data,current_data):
+        inserts a node at a position in the list where value held by the previous node is "prev_data". The argument "data" is the value of the node being inserted.
+    insertNodeEnd(data):
+        inserts a node at the end of the list. The argument "data" is the value of the node being inserted.
+    deleteNodeKey(key):
+        deletes a node whose value is equal to "key".
+    deleteNodePos(position):
+        deletes a node from the nth position of the list where n = "position".
+    deleteCompleteList():
+        deletes the complete list.
+    findListLength():
+        returns the length of the linked list.
+    searchElement(key):
+        searches the list for the node having the value = "key" and returns its position.
+    detectLoopAndFindLoopLength():
+        finds any loop present in the list. If present, returns the loop elements.
+    """
     def __init__(self):
         self.head = None
 
@@ -202,4 +243,3 @@ if __name__ == "__main__":
     else:
         print (f'\nList has loop of length: {loop_length}\n')
         print (f'\nLoop: {[node.data for node in loop+[loop[0]]]}\n')
-
