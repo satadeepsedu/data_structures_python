@@ -280,6 +280,7 @@ if __name__ == "__main__":
     ll.insertNodeEnd(3)
     ll.insertNodeEnd(4)
     ll.insertNodeEnd(5,ll.head.next)
+    print (f'\nList: 1,2,3,4,5,2\n')
     loop_length,loop = ll.detectLoopAndFindLoopLength()
     if loop_length == -1:
         print ('\nList has no loop.\n')
