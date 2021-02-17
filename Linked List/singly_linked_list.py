@@ -182,7 +182,19 @@ class LinkedList:
                 idx = node_list.index(temp)
                 loop_length = len(node_list) - idx
                 return (loop_length,node_list[idx:])
-
+    
+    def find_middle_node(self):
+        if self.head is None:
+            return (-1)
+        else:
+            pointer1 = self.head
+            pointer2 = self.head
+            middle_pos = 1
+            while pointer2 is not None and pointer2.next is not None:
+                pointer2 = pointer2.next.next
+                pointer1 = pointer1.next
+                middle_pos += 1
+            return (middle_pos, pointer1.data)
 
 
 if __name__ == "__main__":
@@ -211,6 +223,8 @@ if __name__ == "__main__":
     print (f'After insertion at end: -\n')
     ll.showList()
     print ('\n')
+    middle_pos,middle_element = ll.find_middle_node()
+    print (f'Middle position: {middle_pos}, Middle Element: {middle_element}\n')
     ll.deleteNodeKey(4)
     print (f'After deletion with key: -\n')
     ll.showList()
@@ -243,5 +257,5 @@ if __name__ == "__main__":
     else:
         print (f'\nList has loop of length: {loop_length}\n')
         print (f'\nLoop: {[node.data for node in loop+[loop[0]]]}\n')
-    print (help(Node))
+
 
