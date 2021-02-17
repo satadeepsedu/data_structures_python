@@ -196,6 +196,24 @@ class LinkedList:
                 middle_pos += 1
             return (middle_pos, pointer1.data)
 
+    def is_list_palindrome(self):
+        if self.head is None:
+            return (-1)
+        else:
+            propagation_stack = []
+            pointer = self.head
+            while pointer is not None:
+                propagation_stack.append(pointer.data)
+                pointer = pointer.next
+            pointer = self.head
+            while pointer is not None:
+                last_ele = propagation_stack.pop()
+                if last_ele != pointer.data:
+                    return (False)
+                pointer = pointer.next
+            return (True)
+
+
 
 if __name__ == "__main__":
     ll = LinkedList()
@@ -225,6 +243,7 @@ if __name__ == "__main__":
     print ('\n')
     middle_pos,middle_element = ll.find_middle_node()
     print (f'Middle position: {middle_pos}, Middle Element: {middle_element}\n')
+    print (f'\nIs list palindrome: {ll.is_list_palindrome()}\n')
     ll.deleteNodeKey(4)
     print (f'After deletion with key: -\n')
     ll.showList()
@@ -246,6 +265,16 @@ if __name__ == "__main__":
     print (f'After deletion of complete list: -\n')
     ll.showList()
     print ('\n')
+    print (f'\nInserting elements into the list.\n')
+    ll.insertNodeEnd(1)
+    ll.insertNodeEnd(2)
+    ll.insertNodeEnd(2)
+    ll.insertNodeEnd(1)
+    ll.showList()
+    print ('\n')
+    print (f'\nIs list palindrome: {ll.is_list_palindrome()}\n')
+    ll.deleteCompleteList()
+    print (f'List deleted\n')
     ll.insertNodeEnd(1)
     ll.insertNodeEnd(2)
     ll.insertNodeEnd(3)
@@ -257,5 +286,3 @@ if __name__ == "__main__":
     else:
         print (f'\nList has loop of length: {loop_length}\n')
         print (f'\nLoop: {[node.data for node in loop+[loop[0]]]}\n')
-
-
