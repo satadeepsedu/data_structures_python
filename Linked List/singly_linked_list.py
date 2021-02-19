@@ -183,7 +183,7 @@ class LinkedList:
                 loop_length = len(node_list) - idx
                 return (loop_length,node_list[idx:])
     
-    def find_middle_node(self):
+    def findMiddleNode(self):
         if self.head is None:
             return (-1)
         else:
@@ -196,7 +196,7 @@ class LinkedList:
                 middle_pos += 1
             return (middle_pos, pointer1.data)
 
-    def is_list_palindrome(self):
+    def isListPalindrome(self):
         if self.head is None:
             return (-1)
         else:
@@ -212,6 +212,87 @@ class LinkedList:
                     return (False)
                 pointer = pointer.next
             return (True)
+
+    def removeDuplicates(self):
+        if self.head is None:
+            print (f'\nList already empty.\n')
+            return ()
+        else:
+            traversed_values = []
+            pointer1 = self.head
+            pointer2 = self.head.next
+            traversed_values.append(pointer1.data)
+            if pointer2 is None:
+                print (f'\nOnly one node in list.\n')
+            else:
+                while pointer2 is not None:
+                    if pointer2.data not in traversed_values:
+                        traversed_values.append(pointer2.data)
+                        pointer1 = pointer1.next
+                        pointer2 = pointer2.next
+                    else:
+                        pointer1.next = pointer2.next
+                        del pointer2
+                        pointer2 = pointer1.next
+            print (f'\nList de-duplicated.\n')
+
+    def mergeSortList(self):
+        pass
+
+    def quickSortList(self):
+        pass
+
+    def separateEvenOddNodes(self):
+        if self.head is None:
+            return ()
+        else:
+            pointer1 = self.head
+            pointer2 = self.head
+            odd_nodes_data = []
+            while pointer2 is not None:
+                if pointer2.data%2==0:
+                    if pointer2 != self.head:
+                        pointer1 = pointer1.next
+                    pointer2 = pointer2.next
+                else:
+                    odd_nodes_data.append(pointer2.data)
+                    if pointer2 == self.head:
+                        self.head = self.head.next
+                        del pointer2
+                        pointer1 = self.head
+                        pointer2 = self.head
+                    else:
+                        pointer1.next = pointer2.next
+                        del pointer2
+                        pointer2 = pointer1.next
+            for node_val in odd_nodes_data:
+                new_node = Node(node_val,None)
+                pointer1.next = new_node
+                pointer1 = new_node
+            return ()
+    
+    def reverseLinkedList(self):
+        if self.head is None:
+            return ()
+        else:
+            pointer1 = self.head
+            pointer2 = pointer1.next
+            if pointer2 is None:
+                print ('\nOne one list in node.\n')
+                return()
+            pointer1.next = None
+            pointer3 = pointer2.next
+            while pointer3 is not None:
+                pointer2.next = pointer1
+                pointer1 = pointer2
+                pointer2 = pointer3
+                pointer3 = pointer3.next
+            pointer2.next = pointer1
+            self.head = pointer2
+        return()
+            
+            
+                        
 
 
 
@@ -241,9 +322,9 @@ if __name__ == "__main__":
     print (f'After insertion at end: -\n')
     ll.showList()
     print ('\n')
-    middle_pos,middle_element = ll.find_middle_node()
+    middle_pos,middle_element = ll.findMiddleNode()
     print (f'Middle position: {middle_pos}, Middle Element: {middle_element}\n')
-    print (f'\nIs list palindrome: {ll.is_list_palindrome()}\n')
+    print (f'\nIs list palindrome: {ll.isListPalindrome()}\n')
     ll.deleteNodeKey(4)
     print (f'After deletion with key: -\n')
     ll.showList()
@@ -272,7 +353,10 @@ if __name__ == "__main__":
     ll.insertNodeEnd(1)
     ll.showList()
     print ('\n')
-    print (f'\nIs list palindrome: {ll.is_list_palindrome()}\n')
+    print (f'\nIs list palindrome: {ll.isListPalindrome()}\n')
+    ll.removeDuplicates()
+    ll.showList()
+    print ('\n')
     ll.deleteCompleteList()
     print (f'List deleted\n')
     ll.insertNodeEnd(1)
@@ -287,3 +371,26 @@ if __name__ == "__main__":
     else:
         print (f'\nList has loop of length: {loop_length}\n')
         print (f'\nLoop: {[node.data for node in loop+[loop[0]]]}\n')
+    del ll
+    ll = LinkedList()
+    ll.insertNodeEnd(17)
+    ll.insertNodeEnd(15)
+    ll.insertNodeEnd(8)
+    ll.insertNodeEnd(12)
+    ll.insertNodeEnd(9)
+    ll.insertNodeEnd(10)
+    ll.insertNodeEnd(1)
+    print (f'\nList before odd even separation:-')
+    ll.showList()
+    print ('\n')
+    ll.separateEvenOddNodes()
+    print (f'\nList after odd even separation:-')
+    ll.showList()
+    print ('\n')
+    print ('\nList before reversal:-')
+    ll.showList()
+    print ('\n')
+    print ('\nList after reversal:-')
+    ll.reverseLinkedList()
+    ll.showList()
+    print ('\n')
